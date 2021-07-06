@@ -3,7 +3,7 @@ const router = require("express").Router();
 const {Workout} = require("../../models");
 
 
-
+// NEED TO FIX
 //GET workout routes
   router.get("/", (req, res) => {
     // WorkOut.find({})
@@ -41,7 +41,7 @@ router.put("/:id", async (req, res) => {
       {
         _id:req.params.id
       },
-      req.body
+      {$push:{"exercises":req.body}}
    )
        
       .then(dbWorkouts => {
