@@ -1,13 +1,23 @@
 
 const router = require("express").Router();
-const WorkOut = require("../../models/workout");
+const {Workout} = require("../../models");
 
 
 
 //GET workout routes
   router.get("/", (req, res) => {
-    WorkOut.find({})
-    //   .sort({ d: -1 })
+    // WorkOut.find({})
+         //TASK 1: Sum up all document fields and find totals
+         Workout.aggregate( [
+          {
+            $addFields: {
+              totalDuration: { $sum: "$exercises.duration" } ,
+              
+              
+            }
+          },
+          
+       ] )
     .then(dbWorkouts => {
         res.json(dbWorkouts);
       })
@@ -19,13 +29,21 @@ const WorkOut = require("../../models/workout");
 
 
 
+ 
 
-//UPDATE workout update routes
 
-router.put("/id", async (req, res) => {
-   await WorkOut.Update(
-       
+
+
+//TASK 2 UPDATE - update workout routes 
+
+router.put("/:id", async (req, res) => {
+   await Workout.updateOne(
+      {
+        _id:req.params.id
+      },
+      req.body
    )
+       
       .then(dbWorkouts => {
         res.json(dbWorkouts);
       })
@@ -38,10 +56,14 @@ router.put("/id", async (req, res) => {
 
 
 
-//CREATE workout create workout routes
+//TASK 3 CREATE - create workout routes
 
 router.post("/", (req, res) => {
-    WorkOut.create(req.body)
+  Workout.collection.insertOne(
+    req.body
+    // ['day']= new Date(new Date().setDate(new Date().getDate()))
+    
+    )
     .then(dbWorkouts => {
         res.json(dbWorkouts);
       })
@@ -52,10 +74,10 @@ router.post("/", (req, res) => {
 
 
 
-//GET  workout in range
+//TASK 4 GET  workout in range
 
 router.get("/range", (req, res) => {
-    WorkOut.find(
+  Workout.find(
 
     )
     .then(dbWorkouts => {
