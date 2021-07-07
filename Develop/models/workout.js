@@ -8,6 +8,7 @@ const workoutSchema = new Schema({
   default: new Date(new Date().setDate(new Date().getDate())),
   },
   exercises:{ 
+  
     typeof: {
     type: String,
     trim: true,
