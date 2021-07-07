@@ -59,12 +59,12 @@ router.put("/:id", async (req, res) => {
 //TASK 3 CREATE - create workout routes
 
 router.post("/", (req, res) => {
-  Workout.collection.insertOne([
-   { "day":null,
-  "exercises":[req.body],
-  }
+  Workout.collection.insertOne({
+   day: new Date(),
+   exercises: [req.body]
+  
     
-]).then(dbWorkouts => {
+  }).then(dbWorkouts => {
         res.json(dbWorkouts);
       })
       .catch(err => {
