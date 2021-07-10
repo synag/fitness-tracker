@@ -39,7 +39,7 @@ Limited usage instructions.
 
 The sreenshot for the Fitness Tracker is below. 
 
-![Fitness Tracker](images\screenshot.png))
+![Fitness Tracker](Develop\public\images\screenshot.png))
 
 ## License
 The license used for this project is MIT. Here is the license link https://opensource.org/licenses/MIT
